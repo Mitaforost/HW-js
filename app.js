@@ -1,9 +1,17 @@
-const age = new Date("2022-01-01");
+function checkAge(birthDateString) {
+  const birthDate = new Date(birthDateString);
+  const today = new Date();
 
-function checkAge(age) {
-  const currentDate = new Date();
-  const difference = currentDate.getFullYear() - age.getFullYear();
-  return difference > 14 ? true : false;
+  let age = today.getFullYear() - birthDate.getFullYear();
+
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  const dayDifference = today.getDate() - birthDate.getDate();
+
+  if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+    age--;
+  }
+
+  return age >= 14;
 }
 
-console.log(checkAge(age));
+console.log(checkAge("2010-12-31"));
