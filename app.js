@@ -1,41 +1,32 @@
-"use strict";
-
-class Person {
-  constructor(rase, name, language) {
-    this.rase = rase;
-    this.name = name;
-    this.language = language;
-  }
-
-  getGreetings() {
-    console.log(`Язык: ${this.language}, Имя: ${this.name}`);
-  }
+function Person(race, name, language) {
+  this.race = race;
+  this.name = name;
+  this.language = language;
 }
 
-class Orc extends Person {
-  constructor(rase, name, language, weapon) {
-    super(rase, name, language);
-    this.weapon = weapon;
-  }
-  getHits() {
-    console.log(`Метод удара, оружие: ${this.weapon}`);
-  }
+Person.prototype.speak = function () {
+  console.log(`Язык: ${this.language}, Имя: ${this.name}`);
+};
+
+function Orc(race, name, language, weapon) {
+  Person.call(this, race, name, language);
+  this.weapon = weapon;
 }
 
-class Elfi extends Person {
-  constructor(rase, name, language, typeOfMagic) {
-    super(rase, name, language);
-    this.typeOfMagic = typeOfMagic;
-  }
-  getCreateMagic() {
-    console.log(`Создать заклинание благодаря: ${this.typeOfMagic}`);
-  }
+Orc.prototype = Object.create(Person.prototype);
+Orc.prototype.constructor = Orc;
+
+Orc.prototype.hit = function () {
+  console.log(`Удар оружием: ${this.weapon}`);
+};
+
+function Elfi(race, name, language, typeOfMagic) {
+  Person.call(this, race, name, language);
+  this.typeOfMagic = typeOfMagic;
 }
+Elfi.prototype = Object.create(Person.prototype);
+Elfi.prototype.constructor = Elfi;
 
-const orc = new Orc("Чернокнижник", "Alan", "English", "Hammer");
-orc.getGreetings();
-orc.getHits();
-
-const elf = new Elfi("God", "Alina", "Russian", "Repear");
-elf.getGreetings();
-elf.getCreateMagic();
+Elfi.prototype.createMagic = function () {
+  console.log(`Создание заклинания с помощью: ${this.typeOfMagic}`);
+};
