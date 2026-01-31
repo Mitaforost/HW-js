@@ -6,15 +6,18 @@ function getGeolocation() {
       reject(new Error("Geolocation не поддерживается"));
       return;
     }
-    navigator.geolocation.getCurrentPosition((position) => {
-      resolve({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
       (error) => {
         reject(error);
-      };
-    });
+      },
+    );
   });
 }
 
