@@ -8,8 +8,8 @@ function getGeolocation() {
     }
     navigator.geolocation.getCurrentPosition((position) => {
       resolve({
-        latitude: position.latitude,
-        longitude: position.longitude,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
       });
       (error) => {
         reject(error);
